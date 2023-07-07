@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import com.shopmax.constant.ItemSellStatus;
 import com.shopmax.dto.ItemFormDto;
+import com.shopmax.exception.OutOfStockException;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -44,6 +45,17 @@ public class Item extends BaseEntity{
 		this.stockNumber = itemFormDto.getStockNumber();
 		this.itemDetail = itemFormDto.getItemDetail();
 		this.itemSellStatus = itemFormDto.getItemSellStatus();
+	}
+	
+	//재고를 감소시키는 메소드
+	public void removeStock(int stockNumber) {
+		int restStock = this.stockNumber - stockNumber; //남은 재고수량
+		
+		if(restStock < 0) {
+			throw new OutOfStockException("상품의 재고가 부족합니다." + "현재 재고수량:" + this.stockNumber);
+		}
+		
+		this.stockNumber = restStock;
 	}
 }
 
