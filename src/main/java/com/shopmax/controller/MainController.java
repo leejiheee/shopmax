@@ -29,7 +29,8 @@ public class MainController {
 		  model.addAttribute("items", items);
 		  model.addAttribute("itemSearchDto", itemSearchDto); //아직 사용X
 	  
-	  return "/main"; }
+	  return "/main"; 
+	  }
 	 
 	
 	
