@@ -1,5 +1,6 @@
 package com.shopmax.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.shopmax.dto.MainItemDto;
+import com.shopmax.dto.ItemRankDto;
 import com.shopmax.dto.ItemSearchDto;
 import com.shopmax.service.ItemService;
 
@@ -25,8 +27,10 @@ public class MainController {
 		 
 		 Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 6);
 		 Page<MainItemDto> items = itemService.getMainItemPage(itemSearchDto, pageable);
+		 List<ItemRankDto> itemsRank = itemService.getItemRankList();
 				 
 		  model.addAttribute("items", items);
+		  model.addAttribute("itemsRank", itemsRank);		  
 		  model.addAttribute("itemSearchDto", itemSearchDto); //아직 사용X
 	  
 	  return "/main"; 
