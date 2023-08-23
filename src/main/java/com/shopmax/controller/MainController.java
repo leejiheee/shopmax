@@ -31,9 +31,9 @@ public class MainController {
 				 
 		  model.addAttribute("items", items);
 		  model.addAttribute("itemsRank", itemsRank);		  
-		  model.addAttribute("itemSearchDto", itemSearchDto); //아직 사용X
+		  model.addAttribute("itemSearchDto", itemSearchDto); 
 	  
-	  return "/main"; 
+	  return "main"; 
 	  }
 	 
 	

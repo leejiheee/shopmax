@@ -61,9 +61,6 @@
 							</tbody>
 						</table>
 
-						<!-- 페이징버튼 -->
-						<!-- start = (현재 페이지 번호/보여줄 페이지 수) * 보여줄 페이지 수 + 1, 페이지 시작번호-->
-						<!-- end = start + (보여줄 페이지수 - 1), 페이지 끝번호 -->
 											<nav
 							th:with="start=${(items.number/maxPage)*maxPage + 1}
 			,end=(${(items.totalPages == 0) ? 1 : (start + (maxPage - 1) < items.totalPages ? start + (maxPage - 1) : items.totalPages)})"

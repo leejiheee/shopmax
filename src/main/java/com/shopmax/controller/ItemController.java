@@ -41,7 +41,7 @@ public class ItemController {
 		model.addAttribute("maxPage", 5);
 		
 		
-		return "/item/itemShopList";
+		return "item/itemShopList";
 	}
 	
 	//상품 상세 페이지
@@ -57,7 +57,7 @@ public class ItemController {
 	@GetMapping(value="/admin/item/new")
 	public String itemForm(Model model) {
 		model.addAttribute("itemFormDto", new ItemFormDto());
-		return "/item/itemForm";
+		return "item/itemForm";
 	}
 	
 	//상품, 상품이미지 등록(insert)
@@ -92,14 +92,15 @@ public class ItemController {
 	 @GetMapping(value={"/admin/items", "/admin/items/{page}"})
 	 public String itemManage(ItemSearchDto itemSearchDto, @PathVariable("page")
 	 Optional<Integer> page, Model model) {   //of(조회할 페이지의 번호<★0부터 시작>, 한 페이지당 조회할 데이터 갯수) //url 경로에 페이지가 있으면 해당 페이지 번호를 조회하도록 하고 페이지 번호가 없으면 0페이지를 조회
-	Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 3);
+	 Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 3);
 	  
 	  Page<Item> items = itemService.getAdminItemPage(itemSearchDto, pageable);
+
+	  model.addAttribute("items", items);
+	  model.addAttribute("itemSearchDto", itemSearchDto);
+	  model.addAttribute("maxPage", 5); //상품관리 페이지 하단에 보여줄 최대 페이지번호
 	  
-	  model.addAttribute("items", items); model.addAttribute("itemSearchDto",
-	  itemSearchDto); model.addAttribute("maxPage", 5); //상품관리 페이지 하단에 보여줄 최대 페이지번호
-	  
-	  return "/item/itemMng"; }
+	  return "item/itemMng"; }
 
 	
 	
